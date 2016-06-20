@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class OfferService implements Subject{
+public class OfferServiceFunctional {
 
-	private List<Observer> observers = new ArrayList<Observer>();
+	private List<Consumer<Offer>>  observers = new ArrayList<Consumer<Offer>>();
 
-	@Override
-	public void registerObserver(Observer o) {
+	public void registerObserver(Consumer<Offer> o) {
 		observers.add(o);		
 	}
 	
@@ -18,7 +17,7 @@ public class OfferService implements Subject{
 	}
 
 	private void notifyObservers(Offer o) {
-		observers.forEach(ob -> ob.notify(o));
+		observers.forEach(ob -> ob.accept(o));
 	}
-	
+
 }
